@@ -177,7 +177,7 @@ public class TokenStream {
 			while ((isLetter(nextChar) || isDigit(nextChar))) {
 				t.setValue(t.getValue() + nextChar);
 				nextChar = readChar();
-				if(isEndOfToken(nextChar())){
+				if(isEndOfToken(nextChar)){
 					break;
 				}
 			}
