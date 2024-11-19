@@ -89,7 +89,6 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
-					return t;
 				}
 				else{
 					t.setValue("<");
@@ -101,7 +100,6 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
-					return t;
 				}
 				else{
 					t.setValue(">");
@@ -125,10 +123,6 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
-					return t;
-				}
-				else{
-					t.setType("Operator");
 				}
 				return t;
 			case '|':
@@ -291,9 +285,7 @@ public class TokenStream {
 
 	private boolean isDigit(char c) {
 		// TODO TO BE COMPLETED
-		/*if(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c =='5') return true;
-		else if(c == '6' || c == '7' || c == '8' || c == '9') return true;
-		else return false;*/
+		
 
 		return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9');
 	}
