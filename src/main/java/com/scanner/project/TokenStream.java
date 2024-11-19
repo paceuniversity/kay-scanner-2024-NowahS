@@ -91,9 +91,6 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				}
-				else{
-					t.setValue("<");
-				}
 				return t;
 			case '>':
 				// >=
@@ -102,9 +99,7 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				}
-				else{
-					t.setValue(">");
-				}
+			
 				return t;
 			case '=':
 				// ==
