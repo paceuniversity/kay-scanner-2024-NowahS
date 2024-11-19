@@ -62,6 +62,7 @@ public class TokenStream {
 				// look for <cr>, <lf>, <ff>
 				while(!isEndOfLine(nextChar) && !isEof){
 					nextChar = readChar();
+					if(isEof) return t;
 				}
 				skipWhiteSpace();
 			} else {
@@ -139,6 +140,14 @@ public class TokenStream {
 					t.setType("Other");
 				}
 
+				return t;
+			case '*':
+				nextChar = readChar();
+				if(nextChar == '*'){
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+					return t;
+				}
 				return t;
 
 			default: // all other operators
