@@ -63,6 +63,9 @@ public class TokenStream {
 					nextChar = readChar();
 				}
 				skipWhiteSpace();
+			if (isEof) {
+				return null;
+			}
 
 
 			} else {
@@ -152,6 +155,15 @@ public class TokenStream {
 				}
 
 				return t;
+			case '*':
+				nextChar = readChar();
+				if(nextChar == '*'){
+					t.setValue(t.getValue()+nextChar);
+					nextChar = readChar();
+					return t;
+				}else{
+					t.setType("Other");
+				}
 
 			default: // all other operators
 				nextChar = readChar();
