@@ -177,6 +177,9 @@ public class TokenStream {
 			while ((isLetter(nextChar) || isDigit(nextChar))) {
 				t.setValue(t.getValue() + nextChar);
 				nextChar = readChar();
+				if(isEndOfToken(nextChar()){
+					break;
+				}
 			}
 			// now see if this is a keyword
 			if (isKeyword(t.getValue())) {
