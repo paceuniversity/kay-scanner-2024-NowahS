@@ -64,7 +64,7 @@ public class TokenStream {
 					nextChar = readChar();
 					if(isEof) return t;
 				}
-				nexchar =readChar();
+				nexChar = readChar();
 				skipWhiteSpace();
 			} else {
 				// A slash followed by anything else must be an operator.
@@ -89,7 +89,7 @@ public class TokenStream {
 					nextChar = readChar();
 				}
 				else{
-					t.setValue(getValue());
+					t.setValue(t.getValue());
 				}
 				return t;
 			case '>':
