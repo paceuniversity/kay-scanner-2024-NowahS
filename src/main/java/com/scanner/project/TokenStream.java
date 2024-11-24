@@ -103,6 +103,7 @@ public class TokenStream {
 				nextChar = readChar();
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
+					t.setType("Operator");
 					nextChar = readChar();
 				}
 				return t;
