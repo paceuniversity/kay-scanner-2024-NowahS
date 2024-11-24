@@ -68,7 +68,7 @@ public class TokenStream {
 			} else {
 				// A slash followed by anything else must be an operator.
 				t.setValue("/");
-				t.setType("Operator");
+				t.setType("Other");
 				return t;
 			}
 		}
@@ -99,14 +99,11 @@ public class TokenStream {
 				return t;
 			case '=':
 				// ==
+				t.setType("Other");
 				nextChar = readChar();
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
-					return t;
-				}
-				else{
-					t.setType("Other");
 				}
 				return t;
 			case '!':
@@ -146,7 +143,6 @@ public class TokenStream {
 				if(nextChar == '*'){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
-					return t;
 				}
 				return t;
 
@@ -179,7 +175,7 @@ public class TokenStream {
 			// now see if this is a keyword
 			if (isKeyword(t.getValue())) {
 				t.setType("Keyword");
-			} else if (t.getValue().equals("True") || t.getValue().equals("False")) {
+			} else if (t.getValue().equals("true") || t.getValue().equals("false")) {
 				t.setType("Literal");
 			}
 			if (isEndOfToken(nextChar)) { // If token is valid, returns.
