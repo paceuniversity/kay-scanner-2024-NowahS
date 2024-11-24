@@ -64,11 +64,12 @@ public class TokenStream {
 					nextChar = readChar();
 					if(isEof) return t;
 				}
+				nexchar =readChar();
 				skipWhiteSpace();
 			} else {
 				// A slash followed by anything else must be an operator.
 				t.setValue("/");
-				t.setType("Other");
+				t.setType("Operator");
 				return t;
 			}
 		}
@@ -87,6 +88,9 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				}
+				else{
+					t.setValue(getValue());
+				}
 				return t;
 			case '>':
 				// >=
@@ -99,12 +103,13 @@ public class TokenStream {
 				return t;
 			case '=':
 				// ==
-				t.setType("Other");
 				nextChar = readChar();
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
-					t.setType("Operator");
 					nextChar = readChar();
+				}
+				else{
+					t.setType("Other");
 				}
 				return t;
 			case '!':
@@ -278,7 +283,8 @@ public class TokenStream {
 		// TODO TO BE COMPLETED
 		
 
-		return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9');
+		//return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9');
+		return(c >= '0' && c <= '9');
 	}
 
 	public boolean isEndofFile() {
