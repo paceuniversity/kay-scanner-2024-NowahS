@@ -156,13 +156,18 @@ public class TokenStream {
 				}
 
 				return t;
-			case '*':
+			/*case '*':
 				nextChar = readChar();
 				if(nextChar == '*'){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
+					return t;
 				}
-				return t;
+				else{
+					t.setType("Other");
+					nextChar = readChar();
+				}
+				return t;*/
 			case ':':
 					nextChar = readChar();
 					if(nextChar == '='){
@@ -205,7 +210,7 @@ public class TokenStream {
 			// now see if this is a keyword
 			if (isKeyword(t.getValue())) {
 				t.setType("Keyword");
-			} else if (t.getValue().equals("true") || t.getValue().equals("false")) {
+			} else if (t.getValue().equals("True") || t.getValue().equals("False")) {
 				t.setType("Literal");
 			}
 			if (isEndOfToken(nextChar)) { // If token is valid, returns.
@@ -264,7 +269,8 @@ public class TokenStream {
 	private boolean isKeyword(String s) {
 		// TODO TO BE COMPLETED 
 
-		return (s.equals("bool") || s.equals("else") || s.equals("if") || s.equals("integer") || s.equals("main") || s.equals("while"));
+		if(s.equals("bool") || s.equals("else") || s.equals("if") || s.equals("integer") || s.equals("main") || s.equals("while")) return true;
+		return false;
 	}
 
 	private boolean isWhiteSpace(char c) {
