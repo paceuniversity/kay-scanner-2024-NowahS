@@ -62,11 +62,11 @@ public class TokenStream {
 				// look for <cr>, <lf>, <ff>
 				while(!isEndOfLine(nextChar) && !isEof){
 					nextChar = readChar();
-					//if(isEof) return t;
 				}
-				nextChar = readChar();
-				//skipWhiteSpace();
-			} else {
+				skipWhiteSpace();
+				if(isEof) return t;
+			} 
+			else {
 				// A slash followed by anything else must be an operator.
 				t.setValue("/");
 				t.setType("Operator");
@@ -87,9 +87,10 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
+					return t;
 				}
 				else{
-					t.setValue(t.getValue());
+					t.setValue("<");
 				}
 				return t;
 			case '>':
@@ -98,6 +99,10 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
+					return t;
+				}
+				else{
+					t.setValue(">");
 				}
 			
 				return t;
@@ -107,6 +112,7 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
+					return t;
 				}
 				else{
 					t.setType("Other");
@@ -118,6 +124,10 @@ public class TokenStream {
 				if( nextChar == '='){
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
+					return t;
+				}
+				else{
+					t.setValue("!");
 				}
 				return t;
 			case '|':
@@ -129,6 +139,7 @@ public class TokenStream {
 					return t;
 				} else {
 					t.setType("Other");
+					nextChar = readChar();
 				}
 				return t;
 
@@ -141,6 +152,7 @@ public class TokenStream {
 					return t;
 				} else {
 					t.setType("Other");
+					nextChar = readChar();
 				}
 
 				return t;
@@ -151,6 +163,18 @@ public class TokenStream {
 					nextChar = readChar();
 				}
 				return t;
+			case ':':
+					nextChar = readChar();
+					if(nextChar == '='){
+						t.setValue(t.getValue() + nextChar);
+						nextChar = readChar();
+						return t;
+					}
+					else{
+						t.setType("Other");
+						nextChar = readChar();
+					}
+					return t;
 
 			default: // all other operators
 				nextChar = readChar();
@@ -264,13 +288,15 @@ public class TokenStream {
 
 	private boolean isSeparator(char c) {
 		// TODO TO BE COMPLETED
-		return(c == '(' || c == ')' || c == '{' || c == '}' || c == ';' || c == ',');
+		if(c == '(' || c == ')' || c == '{' || c == '}' || c == ';' || c == ',') return true;
+		return false;
 	}
 
 	private boolean isOperator(char c) {
 		// Checks for characters that start operators
 		// TODO TO BE COMPLETED
-		return(c == '+' || c == '-' || c == '*' || c == '/' || c == '<' || c == '>' || c == '=' || c == '&' || c == '|' || c == '!' || c == ':');
+		if(c == '+' || c == '-' || c == '*' || c == '/' || c == '<' || c == '>' || c == '=' || c == '&' || c == '|' || c == '!' || c == ':') return true;
+		return false;
 	}
 
 	
@@ -284,7 +310,8 @@ public class TokenStream {
 		
 
 		//return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9');
-		return(c >= '0' && c <= '9');
+		if(c >= '0' && c <= '9') return true;
+		return false;
 	}
 
 	public boolean isEndofFile() {
