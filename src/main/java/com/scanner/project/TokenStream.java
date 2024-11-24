@@ -64,7 +64,7 @@ public class TokenStream {
 					nextChar = readChar();
 					if(isEof) return t;
 				}
-				nexChar = readChar();
+				nextChar = readChar();
 				skipWhiteSpace();
 			} else {
 				// A slash followed by anything else must be an operator.
