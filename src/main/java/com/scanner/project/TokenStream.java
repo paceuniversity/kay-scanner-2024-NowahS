@@ -62,10 +62,10 @@ public class TokenStream {
 				// look for <cr>, <lf>, <ff>
 				while(!isEndOfLine(nextChar) && !isEof){
 					nextChar = readChar();
-					if(isEof) return t;
+					//if(isEof) return t;
 				}
 				nextChar = readChar();
-				skipWhiteSpace();
+				//skipWhiteSpace();
 			} else {
 				// A slash followed by anything else must be an operator.
 				t.setValue("/");
